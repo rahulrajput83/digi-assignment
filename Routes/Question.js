@@ -19,20 +19,32 @@ router.post('/add', (req, res) => {
                 res.json({ message: 'Unauthorized' })
             }
             else {
-                const newQuestion = new Question({
-                    userId: req.body.userId,
-                    name: req.body.name,
-                    email: req.body.email,
-                    link: req.body.link,
-                    Question: req.body.data
-                })
-                newQuestion.save()
+                Question.find({ link: req.body.link })
                     .then((data) => {
-                        res.json({ message: 'Added', question: data })
+                        if (data.length > 0) {
+                            res.json({ message: 'Link not available' })
+                        }
+                        else {
+                            const newQuestion = new Question({
+                                userId: req.body.userId,
+                                name: req.body.name,
+                                email: req.body.email,
+                                link: req.body.link,
+                                Question: req.body.Question
+                            })
+                            newQuestion.save()
+                                .then((data) => {
+                                    res.json({ message: 'Added', question: data })
+                                })
+                                .catch((err) => {
+                                    res.json({ message: 'Error' })
+                                })
+                        }
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         res.json({ message: 'Error' })
                     })
+
             }
         })
     }
@@ -55,12 +67,12 @@ router.post('/getQuestions', (req, res) => {
                 res.json({ message: 'Unauthorized' })
             }
             else {
-                Question.findOne({link: req.body.link})
+                Question.findOne({ link: req.body.link })
                     .then((data) => {
-                        res.json({message: 'Success', data: data})
+                        res.json({ message: 'Success', data: data })
                     })
                     .catch(() => {
-                        res.json({message: 'Error'})
+                        res.json({ message: 'Error' })
                     })
             }
         })
