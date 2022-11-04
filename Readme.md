@@ -53,6 +53,6 @@ Array of Questions can be like this;
 ]
 ```
 
-## getQuestions
+## /getQuestions
 
 This route is used to get quiz by passing quiz link in body of request and accessToken is headers.
