@@ -43,7 +43,7 @@ router.post('/signin', (req, res) => {
                     res.json({message: 'Invalid Password'})
                 }
                 else {
-                    const token = jwt.sign({id: result[0]._id}, process.env.Key, {
+                    const token = jwt.sign({id: result[0]._id, email: result[0].email, role: result[0].role}, process.env.Key, {
                         expiresIn: 3600
                     });
                     res.json({
