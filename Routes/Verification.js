@@ -48,7 +48,9 @@ router.post('/signin', (req, res) => {
                     });
                     res.json({
                         name: result[0].name,
-                        accessToken: token
+                        accessToken: token,
+                        email: result[0].email,
+                        role: result[0].role
                     })
                 }
             }
