@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const Verification = require('./Routes/Verification');
 const Question = require('./Routes/Question');
 const app = express();
@@ -12,6 +13,8 @@ const port = process.env.PORT || 2500;
 app.listen(port, () => {
     console.log(`Server running at ${port}`)
 })
+
+app.use(cors())
 
 app.use(express.urlencoded({ extended: true }));
 
