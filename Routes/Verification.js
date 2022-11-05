@@ -47,6 +47,7 @@ router.post('/signin', (req, res) => {
                         expiresIn: 3600
                     });
                     res.json({
+                        id: result[0]._id,
                         name: result[0].name,
                         accessToken: token,
                         email: result[0].email,
