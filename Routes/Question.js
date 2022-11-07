@@ -22,7 +22,7 @@ router.post('/add', (req, res) => {
                 Question.find({ link: req.body.link })
                     .then((data) => {
                         if (data.length > 0) {
-                            res.json({ message: 'Link not available' })
+                            res.json({ message: 'Custom ID not available' })
                         }
                         else {
                             const newQuestion = new Question({
